@@ -1,27 +1,26 @@
-# eCommerce Application
+# E-Commerce Application
 
-In this project, you'll have an opportunity to demonstrate the security and DevOps skills that you learned in this lesson by completing an eCommerce application. You'll start with a template for the complete application, and your goal will be to take this template and add proper authentication and authorization controls so users can only access their data, and that data can only be accessed in a secure way. 
+This is a simple e-commerce application with proper authentication and authorization controls so users can only access their data, and that data can only be accessed in a secure way. 
 
-## Project Template
-First, you'll want to get set up with the template. The template is written in Java using Spring Boot, Hibernate ORM, and the H2 database. H2 is an in memory database, so if you need to retry something, every application startup is a fresh copy.
+## Packages and Classes
 
-To use the template, import it in the IDE of your choice as a Spring Boot application. Where required, this readme assumes the eclipse IDE.
+This project has 5 packages, as follows:
 
-Once the project is set up, you will see 5 packages:
+* demo - This package contains the main method which runs the application
 
-* demo - this package contains the main method which runs the application
+* model.persistence - This package contains the data models that Hibernate persists to H2. There are 4 models: 
+    - Cart: for holding a User's items 
+    - Item: for defining new items
+    - User: to hold appUser account information
+    - UserOrder: to hold information about submitted orders.
 
-* model.persistence - this package contains the data models that Hibernate persists to H2. There are 4 models: Cart, for holding a User's items; Item , for defining new items; User, to hold appUser account information; and UserOrder, to hold information about submitted orders. Looking back at the application “demo” class, you'll see the `@EntityScan` annotation, telling Spring that this package contains our data models
+* model.persistence.repositories - These contain a `JpaRepository` interface for each of our models. This allows Hibernate to connect them with our database so we can access data in the code, as well as define certain convenience methods.
 
-* model.persistence.repositories - these contain a `JpaRepository` interface for each of our models. This allows Hibernate to connect them with our database so we can access data in the code, as well as define certain convenience methods. Look through them and see the methods that have been declared. Looking at the application “demo” class, you’ll see the `@EnableJpaRepositories` annotation, telling Spring that this package contains our data repositories.
+* model.requests - This package contains the request models. The request models will be transformed by Jackson from JSON to these models as requests are made.
 
-* model.requests - this package contains the request models. The request models will be transformed by Jackson from JSON to these models as requests are made. Note the `Json` annotations, telling Jackson to include and ignore certain fields of the requests. You can also see these annotations on the models themselves.
-
-* controllers - these contain the api endpoints for our app, 1 per model. Note they all have the `@RestController` annotation to allow Spring to understand that they are a part of a REST API
+* controllers - These contain the api endpoints for our app, one per model.
 
 In resources, you'll see the application configuration that sets up our database and Hibernate, It also contains a data.sql file with a couple of items to populate the database with. Spring will run this file every time the application starts
-
-In eclipse, you can right click the project and click  “run as” and select Spring Boot application. The application should tell you it’s starting in the console view. Once started, using a REST client, such as Postman, explore the APIs.
 
 Some examples are as below:
 To create a new appUser for example, you would send a POST request to:
